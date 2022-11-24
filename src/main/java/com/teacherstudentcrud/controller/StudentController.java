@@ -17,39 +17,60 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/student")
 public class StudentController {
-    private final StudentRepository repository;
+    private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
 
 
     @GetMapping(value = "")
-    public String studentsList(){
+    public String studentsList() {
 
         return "student/list";
     }
 
     @GetMapping("/add")
-    public String addStudent(Model model){
+    public String addStudent(Model model) {
         model.addAttribute("student", new Student());
         return "addForm";
     }
+
     @PostMapping("/add")
     public String addStudent(@Valid @ModelAttribute Student student, BindingResult result) {
         if (result.hasErrors()) {
             return "addForm";
         }
-        repository.save(student);
+        studentRepository.save(student);
+        return "redirect:/student";
+    }
+
+    @GetMapping(value = "/update")
+    public String updateStudent(@RequestParam("id") Long id, Model model) {
+        model.addAttribute("student", studentRepository.findById(id));
+        return "addForm";
+    }
+
+    @PostMapping(value = "/update")
+    public String updateStudent(@Valid @ModelAttribute Student student, BindingResult result) {
+        if (result.hasErrors()) {
+            return "addForm";
+        }
+        studentRepository.save(student);
+        return "redirect:/student";
+    }
+
+    @GetMapping(value = "/{id}")
+    public String deleteStudent(@PathVariable("id") Long id) {
+        studentRepository.deleteById(id);
         return "redirect:/student";
     }
 
 
-
     @ModelAttribute("students")
-    public List<Student> allStudents(){
-        return repository.findAll();
+    public List<Student> allStudents() {
+        return studentRepository.findAll();
     }
 
     @ModelAttribute("teachers")
-    public List<Teacher> allTeachers(){
+    public List<Teacher> allTeachers() {
         return teacherRepository.findAll();
     }
 
