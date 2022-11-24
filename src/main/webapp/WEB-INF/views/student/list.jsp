@@ -32,7 +32,12 @@
             <td>${student.age}</td>
             <td>${student.email}</td>
             <td>${student.fieldOfStudy}</td>
-            <td></td>
+            <td>
+                <div><a href="/student/update?id=${student.id}">Edytuj</a> </div>
+            </td>
+            <td>
+                <div><a data-confirm="Are you sure?" data-method="delete" href="/student/${student.id}">Usuń</a> </div>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
