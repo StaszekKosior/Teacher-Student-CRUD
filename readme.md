@@ -8,6 +8,5 @@ Project made as a part of recruitment process
 - Java
 - Spring Boot
 - Spring MVC
-- Hibernate
 - JSP
 
