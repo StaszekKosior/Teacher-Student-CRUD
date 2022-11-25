@@ -4,7 +4,7 @@
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/fragments/header.jsp"/>
 
 <body>
-<h3>Studenci</h3>
+<h3>Nauczyciele</h3>
 <table>
     <thead>
     <tr>
@@ -18,23 +18,26 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="student" items="${students}" varStatus="status">
+    <c:forEach var="teacher" items="${teachers}" varStatus="status">
         <tr>
             <td>${status.count}</td>
-            <td>${student.firstName}</td>
-            <td>${student.lastName}</td>
-            <td>${student.age}</td>
-            <td>${student.email}</td>
-            <td>${student.fieldOfStudy}</td>
+            <td>${teacher.firstName}</td>
+            <td>${teacher.lastName}</td>
+            <td>${teacher.age}</td>
+            <td>${teacher.email}</td>
+            <td>${teacher.educationSpecialty}</td>
             <td>
-                <div><a href="/student/update?id=${student.id}">Edytuj</a> </div>
+                <div><a href="/teacher/update?id=${teacher.id}">Edytuj</a> </div>
             </td>
             <td>
-                <div><a data-confirm="Are you sure?" data-method="delete" href="/student/${student.id}">Usuń</a> </div>
+                <div><a data-confirm="Are you sure?" data-method="delete" href="/teacher/${teacher.id}">Usuń</a> </div>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+<div>
+    <a href="/teacher/add">Dodaj</a>
+</div>
 </body>
 </html>

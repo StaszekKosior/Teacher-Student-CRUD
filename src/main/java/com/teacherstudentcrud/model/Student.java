@@ -1,8 +1,6 @@
 package com.teacherstudentcrud.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -36,6 +34,14 @@ public class Student {
     private String fieldOfStudy;
 
     @ManyToMany
+    @JoinTable(name = "students_teachers",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "teacher_id"))
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Teacher> teachers = new ArrayList<>();
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
 }
