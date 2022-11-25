@@ -1,0 +1,27 @@
+INSERT INTO students (last_name, first_name, age, email, field_of_study) VALUES ('Kowalski', 'Jan', '25', 'ja@kow', 'Matematyka');
+INSERT INTO students (last_name, first_name, age, email, field_of_study) VALUES ('Nowak', 'Zbigniew', '19', 'zbnow', 'Fizyka');
+INSERT INTO students (last_name, first_name, age, email, field_of_study) VALUES ('Wróbel', 'Adam', '22', 'ad@wro', 'Matematyka');
+INSERT INTO students (last_name, first_name, age, email, field_of_study) VALUES ('Danecki', 'Michał', '21', 'mi@dan', 'Fizyka');
+INSERT INTO students (last_name, first_name, age, email, field_of_study) VALUES ('Urszula', 'Piskorska', '19', 'ul@pis', 'Chemia');
+
+INSERT INTO teachers (last_name, first_name, age, email, education_specialty) VALUES ('Aleksandra', 'Miśkiewicz', '43', 'al@mis', 'Chemia');
+INSERT INTO teachers (last_name, first_name, age, email, education_specialty) VALUES ('Andrzej', 'Treter', '44', 'an@tre', 'Matematyka');
+INSERT INTO teachers (last_name, first_name, age, email, education_specialty) VALUES ('Oleg', 'Voynowich', '38', 'ol@voy', 'Matematyka');
+INSERT INTO teachers (last_name, first_name, age, email, education_specialty) VALUES ('Zuzanna', 'Mitura', '28', 'zu@mit', 'Fizyka');
+INSERT INTO teachers (last_name, first_name, age, email, education_specialty) VALUES ('Gryzio', 'Jarosław', '34', 'ja@gry', 'Fizyka');
+
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('1', '1');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('1', '2');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('1', '3');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('1', '4');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('2', '2');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('2', '3');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('2', '4');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('3', '1');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('3', '2');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('3', '3');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('3', '4');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('3', '5');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('4', '2');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('4', '3');
+INSERT INTO students_teachers (student_id, teacher_id) VALUES ('5', '4');

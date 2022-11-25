@@ -30,13 +30,13 @@ public class StudentController {
     @GetMapping("/add")
     public String addStudent(Model model) {
         model.addAttribute("student", new Student());
-        return "addForm";
+        return "student/addForm";
     }
 
     @PostMapping("/add")
     public String addStudent(@Valid @ModelAttribute Student student, BindingResult result) {
         if (result.hasErrors()) {
-            return "addForm";
+            return "student/addForm";
         }
         studentRepository.save(student);
         return "redirect:/student";
@@ -45,13 +45,13 @@ public class StudentController {
     @GetMapping(value = "/update")
     public String updateStudent(@RequestParam("id") Long id, Model model) {
         model.addAttribute("student", studentRepository.findById(id));
-        return "addForm";
+        return "student/addForm";
     }
 
     @PostMapping(value = "/update")
     public String updateStudent(@Valid @ModelAttribute Student student, BindingResult result) {
         if (result.hasErrors()) {
-            return "addForm";
+            return "student/addForm";
         }
         studentRepository.save(student);
         return "redirect:/student";
@@ -64,6 +64,7 @@ public class StudentController {
     }
 
 
+
     @ModelAttribute("students")
     public List<Student> allStudents() {
         return studentRepository.findAll();
@@ -73,6 +74,4 @@ public class StudentController {
     public List<Teacher> allTeachers() {
         return teacherRepository.findAll();
     }
-
-
 }

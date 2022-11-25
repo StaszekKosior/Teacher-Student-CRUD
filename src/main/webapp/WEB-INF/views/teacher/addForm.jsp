@@ -1,18 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <div>
-        <a href="/">Strona główna</a>
-    </div>
-</head>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/fragments/header.jsp"/>
 <body>
-
+<h3>Dodaj nauczyciela</h3>
 <div>
-    <form:form method="post" modelAttribute="student">
+    <form:form method="post" modelAttribute="teacher">
         <div>
             <form:hidden path="id"/>
         </div>
@@ -37,19 +29,20 @@
             <form:errors path="email" cssStyle="color : red"/>
         </div>
         <div>
-            <form:label path="fieldOfStudy">Przedmiot</form:label>
-            <form:input path="fieldOfStudy" type="text"/>
-            <form:errors path="fieldOfStudy" cssStyle="color : red"/>
+            <form:label path="educationSpecialty">Przedmiot</form:label>
+            <form:input path="educationSpecialty" type="text"/>
+            <form:errors path="educationSpecialty" cssStyle="color : red"/>
         </div>
         <div>
-            <form:label path="teachers">Nauczyciele</form:label>
-            <form:select path="teachers" multiple="true">
-                <form:options items="${teachers}" itemLabel="name" itemValue="id"/>
+            <form:label path="students">Studenci</form:label>
+            <form:select path="students" multiple="true">
+                <form:options items="${students}" itemLabel="name" itemValue="id"/>
             </form:select>
         </div>
         <form:button>Zapisz</form:button>
     </form:form>
 </div>
+
 
 </body>
 </html>

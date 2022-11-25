@@ -1,8 +1,6 @@
 package com.teacherstudentcrud.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -24,7 +22,7 @@ public class Teacher {
     @Size(min = 2)
     private String firstName;
 
-    private String lastname;
+    private String lastName;
 
     @Min(18)
     private int age;
@@ -34,10 +32,12 @@ public class Teacher {
 
     private String educationSpecialty;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "teachers")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
     private List<Student> students = new ArrayList<>();
 
     public String getName() {
-        return firstName + " " + lastname;
+        return firstName + " " + lastName;
     }
 }
