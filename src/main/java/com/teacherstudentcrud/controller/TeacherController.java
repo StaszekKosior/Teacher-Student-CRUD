@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -75,6 +76,21 @@ public class TeacherController {
         }
         teacherRepository.deleteById(id);
         return "redirect:/teacher";
+    }
+
+    @GetMapping(value = "/search")
+    public String teacherSearch(@RequestParam String firstName, @RequestParam String lastName, Model model){
+        List <Teacher> searchResult = new ArrayList<>();
+        if (!lastName.equals("") && !firstName.equals("")){
+            searchResult = teacherRepository.findAllByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName.trim().toLowerCase(),
+                    lastName.trim().toLowerCase());
+        } else if (!lastName.equals("") && firstName.equals("")) {
+            searchResult = teacherRepository.findAllByLastNameIgnoreCase(lastName.trim().toLowerCase());
+        } else if (lastName.equals("") && !firstName.equals("")){
+            searchResult = teacherRepository.findAllByFirstNameIgnoreCase(firstName.trim().toLowerCase());
+        }
+        model.addAttribute("teacherSearchResult", searchResult);
+        return "teacher/list";
     }
 
 

@@ -13,4 +13,8 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 Teacher findFirstById(Long id);
 
 
+List<Teacher> findAllByFirstNameIgnoreCase(String firstName);
+List<Teacher> findAllByLastNameIgnoreCase(String lastName);
+List<Teacher> findAllByFirstNameIgnoreCaseAndLastNameIgnoreCase(String lastName, String firstName);
+
 }

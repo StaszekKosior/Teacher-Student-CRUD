@@ -5,6 +5,14 @@
 
 <body>
 <h3>Nauczyciele</h3>
+<div>
+
+    <form action="/teacher/search" method="get">
+        <input type="text" name="firstName" placeholder="podaj imię">
+        <input type="text" name="lastName" placeholder="podaj nazwisko">
+        <input type="submit" value="Szukaj">
+    </form>
+</div>
 <table>
     <thead>
     <tr>
@@ -18,26 +26,46 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="teacher" items="${teachers}" varStatus="status">
-        <tr>
-            <td>${status.count}</td>
-            <td>${teacher.firstName}</td>
-            <td>${teacher.lastName}</td>
-            <td>${teacher.age}</td>
-            <td>${teacher.email}</td>
-            <td>${teacher.educationSpecialty}</td>
-            <td>
-                <div><a href="/teacher/update?id=${teacher.id}">Edytuj</a> </div>
-            </td>
-            <td>
-                <div><a data-confirm="Are you sure?" data-method="delete" href="/teacher/${teacher.id}">Usuń</a> </div>
-            </td>
-        </tr>
-    </c:forEach>
+    <c:choose>
+        <c:when test="${not empty teacherSearchResult}">
+            <c:forEach var="teacher" items="${teacherSearchResult}" varStatus="status">
+                <tr>
+                    <td>${status.count}</td>
+                    <td>${teacher.firstName}</td>
+                    <td>${teacher.lastName}</td>
+                    <td>${teacher.age}</td>
+                    <td>${teacher.email}</td>
+                    <td>${teacher.educationSpecialty}</td>
+                    <td>
+                        <div><a href="/teacher/update?id=${teacher.id}">Edytuj</a></div>
+                    </td>
+                    <td>
+                        <div><a data-method="delete" href="/teacher/${teacher.id}">Usuń</a></div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <c:forEach var="teacher" items="${teachers}" varStatus="status">
+                <tr>
+                    <td>${status.count}</td>
+                    <td>${teacher.firstName}</td>
+                    <td>${teacher.lastName}</td>
+                    <td>${teacher.age}</td>
+                    <td>${teacher.email}</td>
+                    <td>${teacher.educationSpecialty}</td>
+                    <td>
+                        <div><a href="/teacher/update?id=${teacher.id}">Edytuj</a></div>
+                    </td>
+                    <td>
+                        <div><a data-method="delete" href="/teacher/${teacher.id}">Usuń</a></div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:otherwise>
+    </c:choose>
     </tbody>
 </table>
-<div>
-    <a href="/teacher/add">Dodaj</a>
-</div>
+
 </body>
 </html>

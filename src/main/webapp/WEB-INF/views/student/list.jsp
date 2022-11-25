@@ -5,6 +5,12 @@
 
 <body>
 <h3>Studenci</h3>
+
+<form action="/student/search" method="get">
+    <input type="text" name="firstName" placeholder="podaj imię">
+    <input type="text" name="lastName" placeholder="podaj nazwisko">
+    <input type="submit" value="Szukaj">
+</form>
 <table>
     <thead>
     <tr>
@@ -18,22 +24,44 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="student" items="${students}" varStatus="status">
-        <tr>
-            <td>${status.count}</td>
-            <td>${student.firstName}</td>
-            <td>${student.lastName}</td>
-            <td>${student.age}</td>
-            <td>${student.email}</td>
-            <td>${student.fieldOfStudy}</td>
-            <td>
-                <div><a href="/student/update?id=${student.id}">Edytuj</a> </div>
-            </td>
-            <td>
-                <div><a data-confirm="Are you sure?" data-method="delete" href="/student/${student.id}">Usuń</a> </div>
-            </td>
-        </tr>
-    </c:forEach>
+    <c:choose>
+        <c:when test="${not empty studentSearchResult}">
+            <c:forEach var="student" items="${studentSearchResult}" varStatus="status">
+                <tr>
+                    <td>${status.count}</td>
+                    <td>${student.firstName}</td>
+                    <td>${student.lastName}</td>
+                    <td>${student.age}</td>
+                    <td>${student.email}</td>
+                    <td>${student.fieldOfStudy}</td>
+                    <td>
+                        <div><a href="/student/update?id=${student.id}">Edytuj</a></div>
+                    </td>
+                    <td>
+                        <div><a data-method="delete" href="/student/${student.id}">Usuń</a></div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:when>
+        <c:otherwise>
+            <c:forEach var="student" items="${students}" varStatus="status">
+                <tr>
+                    <td>${status.count}</td>
+                    <td>${student.firstName}</td>
+                    <td>${student.lastName}</td>
+                    <td>${student.age}</td>
+                    <td>${student.email}</td>
+                    <td>${student.fieldOfStudy}</td>
+                    <td>
+                        <div><a href="/student/update?id=${student.id}">Edytuj</a></div>
+                    </td>
+                    <td>
+                        <div><a data-method="delete" href="/student/${student.id}">Usuń</a></div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:otherwise>
+    </c:choose>
     </tbody>
 </table>
 </body>
