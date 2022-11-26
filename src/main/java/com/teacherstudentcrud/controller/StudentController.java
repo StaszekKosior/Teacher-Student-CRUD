@@ -4,14 +4,15 @@ import com.teacherstudentcrud.model.Student;
 import com.teacherstudentcrud.model.Teacher;
 import com.teacherstudentcrud.repository.StudentRepository;
 import com.teacherstudentcrud.repository.TeacherRepository;
+import com.teacherstudentcrud.service.SearchService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,6 +21,7 @@ import java.util.List;
 public class StudentController {
     private final StudentRepository studentRepository;
     private final TeacherRepository teacherRepository;
+    private final SearchService searchService;
 
 
     @GetMapping(value = "")
@@ -65,24 +67,20 @@ public class StudentController {
     }
 
     @GetMapping(value = "/search")
-    public String studentSearch(@RequestParam String firstName, @RequestParam String lastName, Model model){
-        List <Student> searchResult = new ArrayList<>();
-        if (!lastName.equals("") && !firstName.equals("")){
-            searchResult = studentRepository.findAllByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName.trim().toLowerCase(),
-                    lastName.trim().toLowerCase());
-        } else if (!lastName.equals("") && firstName.equals("")) {
-            searchResult = studentRepository.findAllByLastNameIgnoreCase(lastName.trim().toLowerCase());
-        } else if (lastName.equals("") && !firstName.equals("")){
-            searchResult = studentRepository.findAllByFirstNameIgnoreCase(firstName.trim().toLowerCase());
-        }
-        model.addAttribute("studentSearchResult", searchResult);
+    public String studentSearch(@RequestParam String firstName, @RequestParam String lastName, Model model) {
+        model.addAttribute("studentSearchResult", searchService.studentSearch(firstName, lastName));
         return "student/list";
     }
 
+    @GetMapping(value = "/search/byTeacher")
+    public String studentSearchByTeacherName(@RequestParam String firstName, @RequestParam String lastName, Model model) {
+        model.addAttribute("studentSearchResult", searchService.studentSearchByTeacher(firstName, lastName));
+        return "student/list";
+    }
 
     @ModelAttribute("students")
     public List<Student> allStudents() {
-        return studentRepository.findAll();
+        return studentRepository.findAllOrderByLastName();
     }
 
     @ModelAttribute("teachers")

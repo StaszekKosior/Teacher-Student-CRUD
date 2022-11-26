@@ -6,8 +6,16 @@
 <body>
 <h3>Nauczyciele</h3>
 <div>
-
+<h5>Wyszukaj nauczyciela po jego imieniu i nazwisku</h5>
     <form action="/teacher/search" method="get">
+        <input type="text" name="firstName" placeholder="podaj imię">
+        <input type="text" name="lastName" placeholder="podaj nazwisko">
+        <input type="submit" value="Szukaj">
+    </form>
+</div>
+<div>
+<h5>Wyszukaj nauczyciela po imieniu i nazwisku studenta</h5>
+    <form action="/teacher/search/byStudent" method="get">
         <input type="text" name="firstName" placeholder="podaj imię">
         <input type="text" name="lastName" placeholder="podaj nazwisko">
         <input type="submit" value="Szukaj">

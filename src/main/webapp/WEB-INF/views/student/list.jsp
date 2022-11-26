@@ -5,12 +5,22 @@
 
 <body>
 <h3>Studenci</h3>
-
-<form action="/student/search" method="get">
-    <input type="text" name="firstName" placeholder="podaj imię">
-    <input type="text" name="lastName" placeholder="podaj nazwisko">
-    <input type="submit" value="Szukaj">
-</form>
+<div>
+    <h5>Wyszukaj studenta po jego imieniu i nazwisku</h5>
+    <form action="/student/search" method="get">
+        <input type="text" name="firstName" placeholder="podaj imię">
+        <input type="text" name="lastName" placeholder="podaj nazwisko">
+        <input type="submit" value="Szukaj">
+    </form>
+</div>
+<div>
+    <h5>Wyszukaj studenta po imieniu i nazwisku nauczyciela</h5>
+    <form action="/student/search/byTeacher" method="get">
+        <input type="text" name="firstName" placeholder="podaj imię">
+        <input type="text" name="lastName" placeholder="podaj nazwisko">
+        <input type="submit" value="Szukaj">
+    </form>
+</div>
 <table>
     <thead>
     <tr>
