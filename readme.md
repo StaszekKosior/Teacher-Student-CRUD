@@ -7,6 +7,6 @@ Project made as a part of recruitment process
 ### Technologies
 - Java
 - Spring Boot
-- Spring MVC
+- Spring MVC, Data
 - JSP
 
