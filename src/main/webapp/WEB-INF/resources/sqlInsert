@@ -13,6 +13,7 @@ INSERT INTO students (first_name, last_name, age, email, field_of_study) VALUES 
 INSERT INTO students (first_name, last_name, age, email, field_of_study) VALUES ('Wojciech', 'Zięba', '22', 'ad@wro', 'Matematyka');
 INSERT INTO students (first_name, last_name, age, email, field_of_study) VALUES ('Krzysztof', 'Danecki', '21', 'mi@dan', 'Fizyka');
 INSERT INTO students (first_name, last_name, age, email, field_of_study) VALUES ('Norbert', 'Piskorski', '19', 'ul@pis', 'Chemia');
+INSERT INTO students (first_name, last_name, age, email, field_of_study) VALUES ('Bartłomiej', 'Kowal', '21', 'ba@ko', 'Matematyka');
 
 INSERT INTO teachers (first_name, last_name, age, email, education_specialty) VALUES ('Aleksandra', 'Miśkiewicz', '43', 'al@mis', 'Chemia');
 INSERT INTO teachers (first_name, last_name, age, email, education_specialty) VALUES ('Dominika', 'Treter', '44', 'an@tre', 'Matematyka');

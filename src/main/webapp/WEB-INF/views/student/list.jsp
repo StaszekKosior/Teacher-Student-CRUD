@@ -25,11 +25,11 @@
     <thead>
     <tr>
         <th>Lp</th>
-        <th>Imię</th>
-        <th>Nazwisko</th>
-        <th>Wiek</th>
-        <th>Email</th>
-        <th>Przedmiot</th>
+        <th><a href="/student?sort=firstName">Imię</a></th>
+        <th><a href="/student?sort=lastName">Nazwisko</a></th>
+        <th><a href="/student?sort=age">Wiek</a></th>
+        <th><a href="/student?sort=email">Email</a></th>
+        <th><a href="/student?sort=fieldOfStudy">Przedmiot</a></th>
         <th>Akcje</th>
     </tr>
     </thead>
@@ -54,7 +54,7 @@
             </c:forEach>
         </c:when>
         <c:otherwise>
-            <c:forEach var="student" items="${students}" varStatus="status">
+            <c:forEach var="student" items="${studentsPagin}" varStatus="status">
                 <tr>
                     <td>${status.count}</td>
                     <td>${student.firstName}</td>
@@ -74,5 +74,17 @@
     </c:choose>
     </tbody>
 </table>
+
+<form action="/student">
+    <input type="hidden" name="currentPage" value="${currentPage}">
+    <input type="hidden" name="direction" value="backward">
+    <input type="submit" value="previous">
+</form>
+<form action="/student">
+    <input type="hidden" name="currentPage" value="${currentPage}">
+    <input type="hidden" name="direction" value="forward">
+    <input type="submit" value="next">
+</form>
+
 </body>
 </html>

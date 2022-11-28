@@ -20,12 +20,12 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2)
+    @Size(min = 2, message = "{firstName.format.error}")
     private String firstName;
 
     private String lastName;
 
-    @Min(18)
+    @Min(value = 18, message = "{age.format.error}")
     private int age;
 
     @Email

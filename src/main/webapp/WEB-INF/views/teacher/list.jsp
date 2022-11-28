@@ -6,7 +6,7 @@
 <body>
 <h3>Nauczyciele</h3>
 <div>
-<h5>Wyszukaj nauczyciela po jego imieniu i nazwisku</h5>
+    <h5>Wyszukaj nauczyciela po jego imieniu i nazwisku</h5>
     <form action="/teacher/search" method="get">
         <input type="text" name="firstName" placeholder="podaj imię">
         <input type="text" name="lastName" placeholder="podaj nazwisko">
@@ -14,7 +14,7 @@
     </form>
 </div>
 <div>
-<h5>Wyszukaj nauczyciela po imieniu i nazwisku studenta</h5>
+    <h5>Wyszukaj nauczyciela po imieniu i nazwisku studenta</h5>
     <form action="/teacher/search/byStudent" method="get">
         <input type="text" name="firstName" placeholder="podaj imię">
         <input type="text" name="lastName" placeholder="podaj nazwisko">
@@ -25,11 +25,11 @@
     <thead>
     <tr>
         <th>Lp</th>
-        <th>Imię</th>
-        <th>Nazwisko</th>
-        <th>Wiek</th>
-        <th>Email</th>
-        <th>Przedmiot</th>
+        <th><a href="/teacher?sort=firstName">Imię</a></th>
+        <th><a href="/teacher?sort=lastName">Nazwisko</a></th>
+        <th><a href="/teacher?sort=age">Wiek</a></th>
+        <th><a href="/teacher?sort=email">Email</a></th>
+        <th><a href="/teacher?sort=educationSpecialty">Przedmiot</a></th>
         <th>Akcje</th>
     </tr>
     </thead>
@@ -54,7 +54,7 @@
             </c:forEach>
         </c:when>
         <c:otherwise>
-            <c:forEach var="teacher" items="${teachers}" varStatus="status">
+            <c:forEach var="teacher" items="${teacherPagin}" varStatus="status">
                 <tr>
                     <td>${status.count}</td>
                     <td>${teacher.firstName}</td>
@@ -74,6 +74,17 @@
     </c:choose>
     </tbody>
 </table>
+
+<form action="/teacher">
+    <input type="hidden" name="currentPage" value="${currentPage}">
+    <input type="hidden" name="direction" value="backward">
+    <input type="submit" value="previous">
+</form>
+<form action="/teacher">
+    <input type="hidden" name="currentPage" value="${currentPage}">
+    <input type="hidden" name="direction" value="forward">
+    <input type="submit" value="next">
+</form>
 
 </body>
 </html>

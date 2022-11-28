@@ -7,11 +7,15 @@ import com.teacherstudentcrud.repository.TeacherRepository;
 import com.teacherstudentcrud.service.SearchService;
 import com.teacherstudentcrud.service.TeacherService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -23,10 +27,32 @@ public class TeacherController {
     private final TeacherRepository teacherRepository;
     private final TeacherService teacherService;
     private final SearchService searchService;
-
+    static final int SIZE = 5;
 
     @GetMapping(value = "")
-    public String teachersList() {
+    public String teachersList(@RequestParam(required = false, defaultValue = "0") int currentPage,
+                               @RequestParam(required = false) String direction,
+                               @RequestParam(required = false, defaultValue = "id") String sort,
+                               Model model, HttpSession session) {
+        if (direction != null && direction.equals("forward")) {
+            currentPage++;
+            if (currentPage > teacherRepository.findAll().size() / SIZE) {
+                currentPage--;
+            }
+        } else if (direction != null && direction.equals("backward")) {
+            currentPage--;
+            if (currentPage < 0) {
+                currentPage = 0;
+            }
+        }
+        if (sort.equals("id") && session.getAttribute("sort") == null) {
+            session.setAttribute("sort", sort);
+        } else if (!sort.equals("id")) {
+            session.setAttribute("sort", sort);
+        }
+        Pageable firstPageWithTwoElements = PageRequest.of(currentPage, SIZE, Sort.by((String) session.getAttribute("sort")));
+        model.addAttribute("teacherPagin", teacherRepository.findAll(firstPageWithTwoElements).getContent());
+        model.addAttribute("currentPage", currentPage);
 
         return "teacher/list";
     }
@@ -91,7 +117,7 @@ public class TeacherController {
 
     @ModelAttribute("teachers")
     public List<Teacher> allTeachers() {
-        return teacherRepository.findAllOrderByLastName();
+        return teacherRepository.findAll();
     }
 }
 

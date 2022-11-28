@@ -1,20 +1,17 @@
 package com.teacherstudentcrud.repository;
 
-import com.teacherstudentcrud.model.Student;
 import com.teacherstudentcrud.model.Teacher;
-import org.springframework.data.convert.ThreeTenBackPortConverters;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 
     Teacher findFirstById(Long id);
-
-    @Query("SELECT t FROM Teacher t ORDER BY t.lastName, t.firstName ASC")
-    List<Teacher> findAllOrderByLastName();
 
     List<Teacher> findAllByFirstNameIgnoreCase(String firstName);
 
